@@ -1,5 +1,3 @@
-console.log('Up and running!');
-
 var cards = [
 {
 	rank: 'queen',
@@ -26,36 +24,40 @@ var cards = [
 var cardsInPlay = [];
 
 function checkForMatch() {
-if (cardsInPlay.length === 2) {
+setTimeout(function() {
 if (cardsInPlay[0] === cardsInPlay[1]) {
-  console.log("You found a match!");
+  alert("You found a match!");
 } else {
-  console.log("Sorry, try again.");
+  alert("Sorry, try again.");
 }
+}, 100);
 }
-}
-//change console.log to alert
+//setTimeout delays the alert until both cards are flipped.
 
-function flipCard(cardID) {
+function flipCard() {
+var cardID = this.getAttribute('data-id');
 console.log('User flipped '+ cards[cardID].rank);
 cardsInPlay.push(cards[cardID].rank);
 console.log(cards[cardID].cardImage);
 console.log(cards[cardID].suit);
+this.setAttribute('src', cards[cardID].cardImage);
+if (cardsInPlay.length === 2) {
 checkForMatch();
+}
 };
 
-//or could put .length === 2 before checkForMatch?
+var createBoard = function() {
+	for (var i = 0; i < cards.length; i++) {
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', 'images/back.png');
+    cardElement.setAttribute('data-id', i);
+    cardElement.addEventListener('click', flipCard);
+    document.getElementById('game-board').appendChild(cardElement);
+}
+}
 
-flipCard(0);
-flipCard(2);
+createBoard();
 
-/* 
-if (cardsInPlay.length === 2) {
-if (cardsInPlay[0] === cardsInPlay[1]) {
-alert('You found a match!');
-}else {
- alert('Sorry, try again.');
- }
-} 
-*/
+
+
 
