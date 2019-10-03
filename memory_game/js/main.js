@@ -31,7 +31,7 @@ if (cardsInPlay[0] === cardsInPlay[1]) {
   alert("Sorry, try again.");
 }
 }, 100);
-}
+};
 //setTimeout delays the alert until both cards are flipped.
 
 function flipCard() {
@@ -46,6 +46,17 @@ checkForMatch();
 }
 };
 
+var refresh = function() {
+	console.log('reset');
+	cardsInPlay.pop();
+	cardsInPlay.pop();
+	var doc = document.getElementById('game-board');
+	while (doc.hasChildNodes()) {
+		doc.removeChild(doc.firstChild);
+	};
+	createBoard();
+};
+
 var createBoard = function() {
 	for (var i = 0; i < cards.length; i++) {
     var cardElement = document.createElement('img');
@@ -53,11 +64,12 @@ var createBoard = function() {
     cardElement.setAttribute('data-id', i);
     cardElement.addEventListener('click', flipCard);
     document.getElementById('game-board').appendChild(cardElement);
+    document.getElementById('reset').addEventListener('click', refresh);
 }
-}
+};
 
 createBoard();
-
+  
 
 
 
