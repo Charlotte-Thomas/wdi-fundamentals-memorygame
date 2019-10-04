@@ -52,11 +52,10 @@ checkForMatch();
 
 var refresh = function() {
 	console.log('reset');
-	cardsInPlay.pop();
-	cardsInPlay.pop();
 	var doc = document.getElementById('game-board');
 	while (doc.hasChildNodes()) {
 		doc.removeChild(doc.firstChild);
+		cardsInPlay.pop();
 	};
 	createBoard();
 };
