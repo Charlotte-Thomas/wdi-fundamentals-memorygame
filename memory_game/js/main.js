@@ -22,13 +22,17 @@ var cards = [
 ];
 
 var cardsInPlay = [];
+var scoreCount = 0;
 
 function checkForMatch() {
 setTimeout(function() {
 if (cardsInPlay[0] === cardsInPlay[1]) {
-  alert("You found a match!");
+	scoreCount+= 1;
+  	alert("You found a match!" + '\r\n' + 'Your score:' + ' ' + scoreCount);
+  	console.log('score:', scoreCount);
 } else {
-  alert("Sorry, try again.");
+  	alert("Sorry, try again." + '\r\n' + 'Your score:' + ' ' + scoreCount);
+  	console.log('score:', scoreCount);
 }
 }, 100);
 };
