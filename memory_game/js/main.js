@@ -30,10 +30,15 @@ if (cardsInPlay[0] === cardsInPlay[1]) {
 	scoreCount+= 1;
   	alert("You found a match!" + '\r\n' + 'Your score:' + ' ' + scoreCount);
   	console.log('score:', scoreCount);
+  	cardsInPlay.pop();
+  	cardsInPlay.pop();
 } else {
   	alert("Sorry, try again." + '\r\n' + 'Your score:' + ' ' + scoreCount);
   	console.log('score:', scoreCount);
-}
+  	setTimeout(function() {
+	refresh();
+	}, 100)
+  }
 }, 100);
 };
 //setTimeout delays the alert until both cards are flipped.
@@ -59,6 +64,8 @@ var refresh = function() {
 	};
 	createBoard();
 };
+
+//refresh turns cards over if a pair do not match or reset button is used
 
 var createBoard = function() {
 	for (var i = 0; i < cards.length; i++) {
