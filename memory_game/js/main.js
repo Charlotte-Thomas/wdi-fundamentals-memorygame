@@ -26,7 +26,7 @@ var scoreCount = 0;
 
 function checkForMatch() {
 setTimeout(function() {
-if (cardsInPlay[0] === cardsInPlay[1]) {
+if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
 	scoreCount+= 1;
   	alert("You found a match!" + '\r\n' + 'Your score:' + ' ' + scoreCount);
   	console.log('score:', scoreCount);
@@ -36,7 +36,7 @@ if (cardsInPlay[0] === cardsInPlay[1]) {
   	alert("Sorry, try again." + '\r\n' + 'Your score:' + ' ' + scoreCount);
   	console.log('score:', scoreCount);
   	setTimeout(function() {
-	refresh();
+  		flipCardBack();
 	}, 100)
   }
 }, 100);
@@ -44,16 +44,32 @@ if (cardsInPlay[0] === cardsInPlay[1]) {
 //setTimeout delays the alert until both cards are flipped.
 
 function flipCard() {
-var cardID = this.getAttribute('data-id');
-console.log('User flipped '+ cards[cardID].rank);
-cardsInPlay.push(cards[cardID].rank);
-console.log(cards[cardID].cardImage);
-console.log(cards[cardID].suit);
-this.setAttribute('src', cards[cardID].cardImage);
-if (cardsInPlay.length === 2) {
-checkForMatch();
-}
+	var cardID = this.getAttribute('data-id');
+	console.log('User flipped '+ cards[cardID].rank);
+	cardsInPlay.push(cards[cardID]);
+	console.log(cards[cardID].cardImage);
+	console.log(cards[cardID].suit);
+	this.setAttribute('src', cards[cardID].cardImage);
+	if (cardsInPlay.length === 2) {
+	checkForMatch();
+	}
 };
+
+function flipCardBack() {
+for (var i = 0; i < cards.length; i++) {
+	if (cardsInPlay[0] === cards[i]) {
+	document.getElementById('game-board').children[i++].setAttribute('src', 'images/back.png');
+	}
+	};
+	for (var i = 0; i < cards.length; i++) {
+	if (cardsInPlay[1] === cards[i]) {
+	document.getElementById('game-board').children[i++].setAttribute('src', 'images/back.png');
+	}
+	};
+	cardsInPlay.pop();
+	cardsInPlay.pop();
+};
+//flips the 2 specific cards if match is wrong
 
 var refresh = function() {
 	console.log('reset');
@@ -64,8 +80,7 @@ var refresh = function() {
 	};
 	createBoard();
 };
-
-//refresh turns cards over if a pair do not match or reset button is used
+//refresh turns all cards back over if reset button is used
 
 var createBoard = function() {
 	for (var i = 0; i < cards.length; i++) {
