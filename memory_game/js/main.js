@@ -30,6 +30,7 @@ if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
 	scoreCount+= 1;
   	alert("You found a match!" + '\r\n' + 'Your score:' + ' ' + scoreCount);
   	console.log('score:', scoreCount);
+  	document.getElementById('score').innerHTML = scoreCount;
   	cardsInPlay.pop();
   	cardsInPlay.pop();
 } else {
@@ -79,6 +80,8 @@ var refresh = function() {
 		cardsInPlay.pop();
 	};
 	createBoard();
+	scoreCount = 0;
+	document.getElementById('score').innerHTML = scoreCount;
 };
 //refresh turns all cards back over if reset button is used
 
@@ -94,6 +97,7 @@ var createBoard = function() {
 };
 
 createBoard();
+document.getElementById('score').innerHTML = scoreCount;
   
 
 

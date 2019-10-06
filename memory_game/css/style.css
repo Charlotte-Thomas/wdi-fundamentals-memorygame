@@ -59,6 +59,20 @@ p {
 	font-size: 18px;
 }
 
+.box {
+	text-align: left;
+	positiom: center;
+	background: RGBA(0,150,200,.2);
+	width: 230px;
+	margin: 20px 0 -10px 270px;
+	padding: 7px 0 7px 75px;
+}
+
+span {
+	margin-left: 10px;
+	font-weight: bold;
+}
+
 img {
 	margin: 40px 8px 0px 8px;
 }
